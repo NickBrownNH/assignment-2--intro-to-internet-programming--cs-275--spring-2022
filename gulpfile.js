@@ -3,7 +3,7 @@ const { src, dest, series, watch } = require(`gulp`),
     htmlCompressor = require(`gulp-htmlmin`),
     CSSLinter = require(`gulp-stylelint`),
     jsLinter = require(`gulp-eslint`),
-    translator = require(`gulp-babel`),
+    babel = require(`gulp-babel`),
     browserSync = require(`browser-sync`),
     reload = browserSync.reload;
 
@@ -33,15 +33,21 @@ let lintJS = () => {
         .pipe(jsLinter.formatEach(`compact`));
 };
 
+let buildJS = () => {
+    return src('js/*.js')
+       .pipe(babel())
+       .pipe(dest('./transpiled'))
+ };
+
 let serve = () => {
     browserSync({
         notify: true,
         reloadDelay: 100,
         server: {
             baseDir: [
-                `temp`,
-                `dev`,
-                `dev/html`
+                `js`,
+                `css`,
+                `html`
             ]
         }
     });
@@ -57,6 +63,7 @@ let serve = () => {
 };
 
 
+exports.buildJS = buildJS;
 exports.lintJS = lintJS;
 exports.lintCSS = lintCSS;
 exports.validateHTML = validateHTML;
