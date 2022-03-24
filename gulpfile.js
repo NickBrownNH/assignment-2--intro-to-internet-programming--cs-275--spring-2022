@@ -26,7 +26,44 @@ let lintCSS = () => {
         }));
 };
 
+let lintJS = () => {
+    return src(`js/*.js`)
+        .pipe(jsLinter())
+        .pipe(jsLinter.formatEach(`compact`));
+};
+
+let serve = () => {
+    browserSync({
+        notify: true,
+        reloadDelay: 100,
+        server: {
+            baseDir: [
+                `temp`,
+                `dev`,
+                `dev/html`
+            ]
+        }
+    });
+
+    watch(`html/*.html`, validateHTML)
+        .on(`change`, reload);
+
+    watch(`css/*.css`, lintCSS)
+        .on(`change`, reload);
+
+    watch(`js/*.js`, lintJS)
+        .on(`change`, reload);
+};
+
+
+exports.lintJS = lintJS;
 exports.lintCSS = lintCSS;
 exports.validateHTML = validateHTML;
 exports.compressHTML = compressHTML;
 exports.HTMLProcessing = series(validateHTML, compressHTML);
+exports.serve = series(
+    validateHTML,
+    lintCSS,
+    lintJS,
+    serve
+);
