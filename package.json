@@ -23,9 +23,12 @@
     "browser-sync": "^2.27.9",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
+    "gulp-cssmin": "^0.2.0",
     "gulp-eslint": "^6.0.0",
     "gulp-html": "^3.5.0",
-    "gulp-htmlmin": "^5.0.1"
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-jsmin": "^0.1.5",
+    "gulp-sass": "^5.1.0"
   },
   "dependencies": {
     "gulp-stylelint": "^13.0.0"

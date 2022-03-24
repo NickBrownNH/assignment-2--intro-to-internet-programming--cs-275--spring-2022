@@ -1,6 +1,8 @@
 const { src, dest, series, watch } = require(`gulp`),
     htmlValidator = require(`gulp-html`),
     htmlCompressor = require(`gulp-htmlmin`),
+    CSSCompressor = require(`gulp-cssmin`),
+    JSCompressor = require(`gulp-jsmin`),
     CSSLinter = require(`gulp-stylelint`),
     jsLinter = require(`gulp-eslint`),
     babel = require(`gulp-babel`),
@@ -14,6 +16,18 @@ let validateHTML = () => {
 let compressHTML = () => {
     return src([`html/*.html`,`html/**/*.html`])
         .pipe(htmlCompressor({collapseWhitespace: true}))
+        .pipe(dest(`prod`));
+};
+
+let compressCSS = () => {
+    return src([`css/*.css`,`css/**/*.css`])
+        .pipe(CSSCompressor({collapseWhitespace: true}))
+        .pipe(dest(`prod`));
+};
+
+let compressJS = () => {
+    return src([`js/*.js`,`js/**/*.js`])
+        .pipe(JSCompressor({collapseWhitespace: true}))
         .pipe(dest(`prod`));
 };
 
@@ -62,6 +76,18 @@ let serve = () => {
         .on(`change`, reload);
 };
 
+let build = () => {
+    browserSync({
+        notify: true,
+        reloadDelay: 100,
+        server: {
+            baseDir: [
+                `prod`
+            ]
+        }
+    });
+};
+
 
 exports.buildJS = buildJS;
 exports.lintJS = lintJS;
@@ -74,4 +100,10 @@ exports.serve = series(
     lintCSS,
     lintJS,
     serve
+);
+exports.build = series(
+    compressHTML,
+    compressCSS,
+    compressJS,
+    build
 );
