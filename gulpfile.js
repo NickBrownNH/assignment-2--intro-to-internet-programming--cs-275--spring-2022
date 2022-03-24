@@ -10,7 +10,8 @@ const { src, dest, series, watch } = require(`gulp`),
     reload = browserSync.reload;
 
 let validateHTML = () => {
-    return src([`html/*.html`, `html/**/*.html`]).pipe(htmlValidator());
+    return src([`html/*.html`, `html/**/*.html`])
+    .pipe(htmlValidator());
 };
 
 let compressHTML = () => {
