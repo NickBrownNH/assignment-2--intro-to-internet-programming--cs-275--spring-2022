@@ -10,24 +10,24 @@ const { src, dest, series, watch } = require(`gulp`),
     reload = browserSync.reload;
 
 let validateHTML = () => {
-    return src([`dev/html/*.html`, `dev/html/**/*.html`])
+    return src([`dev/html/*.html`])
     .pipe(htmlValidator());
 };
 
 let compressHTML = () => {
-    return src([`dev/html/*.html`,`dev/html/**/*.html`])
+    return src([`dev/html/*.html`])
         .pipe(htmlCompressor({collapseWhitespace: true}))
         .pipe(dest(`prod/html`));
 };
 
 let compressCSS = () => {
-    return src([`dev/css/*.css`,`dev/css/**/*.css`])
+    return src([`dev/css/*.css`])
         .pipe(CSSCompressor({collapseWhitespace: true}))
         .pipe(dest(`prod/css`));
 };
 
 let compressJS = () => {
-    return src([`dev/js/*.js`,`dev/js/**/*.js`])
+    return src([`dev/js/*.js`])
         .pipe(jsCompressor({collapseWhitespace: true}))
         .pipe(dest(`prod/js`));
 };
@@ -51,7 +51,7 @@ let lintJS = () => {
 let transpileJS = () => {
     return src('dev/js/*.js')
        .pipe(babel())
-       .pipe(dest('./temp/js'))
+       .pipe(dest('temp/js'))
  };
 
  let transpileJSForProd = () => {
