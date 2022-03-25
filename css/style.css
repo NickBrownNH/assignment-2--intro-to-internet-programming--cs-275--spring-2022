@@ -45,18 +45,34 @@ p {
   justify-content: center;
   border: 10px solid black;
   background-color: rgb(255, 255, 255);
-  border-width: 50%;
   line-height: 150%;
   padding-top: 20px;
   margin: 0;
 }
 
+.number-box-text {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.typing-box {
+  display: flex;
+  justify-content: center;
+}
+
+.cup-calculator {
+  margin-top: 5px;
+  border: 10px solid black;
+  background-color: rgb(255, 255, 255);
+}
+
 footer {
-    display: flex;
-    justify-content: center;
-    font-size: 10px;
-    color: rgb(175, 175, 175);
-    line-height: 150%;
-    padding-top: 20px;
-    margin: 0;
-  }
+  display: flex;
+  justify-content: center;
+  font-size: 10px;
+  color: rgb(175, 175, 175);
+  line-height: 150%;
+  padding-top: 20px;
+  margin: 0;
+}

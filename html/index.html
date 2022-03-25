@@ -13,9 +13,19 @@
   <main>
     <p>Which type of rice would you like to make?</p>
     <p class="button"><button class="buttons" id="left-button">White Rice</button></p>
-    <p class="buttonText">or</p>
+    <p class="button">or</p>
     <p class="button"><button class="buttons" id="right-button">California Sprouted Rice</button></p>
-    <div><p class="recipe" id="text-box">Press the type you want a recipe for and the recipe will pop up</p></div>
+    <div class="recipe">
+      <p id="text-box">Press the type you want a recipe for and the recipe will pop up</p>
+    </div>
+    <div class="cup-calculator">
+      <p>Select which type and how many cups of rice you want to cook</p>
+      <p>Use the up and down arrow keys to pick how many cups:</p>
+      <div class="typing-box"><input type="number" name="number-box" id="number-box"></div>
+      <p class="number-box-text">You will need</p>
+      <p id="number-box-text"></p>
+      <p class="number-box-text">cups of water</p>
+    </div>
   </main>
   <script src="app.js"></script><!-- DO NOT ALTER THIS LINE -->
   <footer>
