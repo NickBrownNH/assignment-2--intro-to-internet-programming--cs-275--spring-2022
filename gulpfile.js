@@ -48,10 +48,10 @@ let lintJS = () => {
         .pipe(jsLinter.formatEach(`compact`));
 };
 
-let buildJS = () => {
+let transpileJS = () => {
     return src('js/*.js')
        .pipe(babel())
-       .pipe(dest('./transpiled'))
+       .pipe(dest('./temp'))
  };
 
 let serve = () => {
@@ -60,8 +60,8 @@ let serve = () => {
         reloadDelay: 100,
         server: {
             baseDir: [
+                `temp`,
                 `js`,
-                `css`,
                 `html`
             ]
         }
@@ -77,20 +77,7 @@ let serve = () => {
         .on(`change`, reload);
 };
 
-let build = () => {
-    browserSync({
-        notify: true,
-        reloadDelay: 100,
-        server: {
-            baseDir: [
-                `prod`
-            ]
-        }
-    });
-};
-
-
-exports.buildJS = buildJS;
+exports.transpileJS = transpileJS;
 exports.lintJS = lintJS;
 exports.lintCSS = lintCSS;
 exports.validateHTML = validateHTML;
@@ -105,6 +92,5 @@ exports.serve = series(
 exports.build = series(
     compressHTML,
     compressCSS,
-    compressJS,
-    build
+    compressJS
 );
